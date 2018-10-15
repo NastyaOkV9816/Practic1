@@ -1,0 +1,181 @@
+1) /ip
+
+Запрос:
+open httpbin.org 80
+GET /ip HTTP/1.1 (Запрашиваем ip сервера)
+Host: httpbin.org
+Accept: */*
+
+Ответ на запрос:
+HTTP/1.1 200 OK (Код состояния 200 означает, что запрос прошел успешно)
+Connection: keep-alive (Поддерживает соединение)
+Server: gunicorn/19.9.0 (Информация о сервере)
+Date: Sat, 30 Sep 2018 14:12:16 GMT 
+Content-Type: application/json (В теле ответа мы получили json объект)
+Content-Length: 31 
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+Via: 1.1 vegur
+
+{
+   "origin": "212.193.94.40"                (В ответе содержится  мой IP адрес)
+                           }
+
+2) /get 
+
+Запрос на получение параметров:
+open httpbin.org 80
+GET /get?foo=bar&1=2&2/0&error=True HTTP/1.1 (Запрашиваем ресурс /get c параметрами foo=bar и 1=2, и 2/0, и error=True по протоколу HTTP версии 1.1)
+Host: httpbin.org
+Accept: */*
+
+Ответ на запрос:
+HTTP/1.1 200 OK (Код состояния 200 означает, что запрос прошел успешно)
+Connection: keep-alive (Поддерживает соединение)
+Server: gunicorn/19.9.0 (Информация о сервере)
+Date: Sat, 30 Sep 2018 15:37:19 GMT
+Content-Type: application/json (В теле ответа мы получили json объект)
+Content-Length: 281
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+Via: 1.1 vegur
+
+{
+   "args": {                             (Переданные параметры)
+             "1": "2",
+             "2/0": "",
+             "error": "True",
+             "foo": "bar"
+            },
+   "headers": {                         (Заголовки запроса)
+              "Accept": "*/*",
+              "Connection": "close",
+              "Host": "httpbin.org"
+            },
+   "origin": "212.193.94.40",          (Мой ip адрес)
+   "url": "http://httpbin.org/get?foo=bar&1=2&2%2F0&error=True"  (Адрес ресурса, который был запрошен)
+}
+
+3) /post
+Запрос формы к серверу :
+open httpbin.org 80
+POST /post HTTP/1.1   (Отправить POST запрос ресурсу /post по протоколу HTTP/1.1)
+Host: httpbin.org
+Accept: */*
+Content-Length: 35
+Content-Type: application/x-www-form-urlencoded
+
+foo=bar&1=2&2%2F0=&error=True     (Указаны параметры POST запроса)
+
+Ответ на запрос:
+HTTP/1.1 200 OK (Код состояния 200 означает, что запрос прошел успешно)
+Connection: keep-alive (Поддерживает соединение)
+Server:gunicorn/19.9.0 (Информация о сервере)
+Date: Sat, 30 Sep 2018 15:58:43 GMT
+Content-Type: application/json             (В теле ответа мы получили json объект)
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+X-Powered-By: Flask
+X-Processed-Time: 0.000952959060669
+Content-Length: 416
+Via: 1.1 vegur
+
+{
+  "args": {},                              (Переданные параметры)
+  "data": "", 
+  "files": {}, 
+  "form": {
+    "1": "2", 
+    "2/0": "", 
+    "error": "True\r\n\r\n\r\n", 
+    "foo": "bar"
+  }, 
+  "headers": {                               (Заголовки запроса)
+    "Accept": "*/*", 
+    "Connection": "close", 
+    "Content-Length": "35", 
+    "Content-Type": "application/x-www-form-urlencoded", 
+    "Host": "httpbin.org"
+  }, 
+  "json": null, 
+  "origin": "212.193.94.40",       (Мой ip адрес)
+  "url": "http://httpbin.org/post" (Адрес ресурса, который был запрошен)
+
+}
+
+4) /cookies/set
+
+Запрос:
+open httpbin.org 80
+GET /cookies/set?country=Ru HTTP/1.1 (Запрашиваем ресурс /cookies/set по протоколу HTTP версии 1.1 с параметрами: country=Ru)
+Host: httpbin.org
+Accept: */*
+
+Ответ на запрос:
+HTTP/1.1 302 FOUND (Код состояния 302 указывает, что данные были перемещены на сервере)
+Connection: keep-alive (Поддерживает соединение)
+Server: gunicorn/19.9.0 (Информация о сервере)
+Date: Sat, 30 Sep 2018 16:11:27 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 223
+Location: /cookies  (Ресурс был временно перемещен по адресу /cookies)
+Set-Cookie: country=Ru; Path=/  (Веб-Сервер указывает браузеру, что необходимо установить значение для cookie country=Ru)
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+Via: 1.1 vegur
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">                                    (Получили html разметку)
+<title>Redirecting...</title>
+<p>You should be redirected automatically to target URL: <a href="/cookies">/cookies</a>.  If not click the link.
+
+5) /cookies
+
+Запрос:
+open httpbin.org 80
+GET /cookies HTTP/1.1 ( Запрашиваем ресурс /cookies по протоколу HTTP версии 1.1)
+Host: httpbin.org
+Accept: */*
+
+
+Ответ на запрос:
+HTTP/1.1 200 OK (Код состояния 200 означает, что запрос прошел успешно)
+Connection: keep-alive (Поддерживает соединение)
+Server: gunicorn/19.9.0 (Информация о сервере)
+Date: Sat, 30 Sep 2018 16:47:32 GMT
+Content-Type: application/json (В теле ответа мы получили json объект)
+Content-Length: 20
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+Via: 1.1 vegur
+
+{
+   "cookies": {}                           ( Получили пустые cookies,так как они не были указаны в запросе)
+                }
+
+6) /redirect
+
+Запрос к серверу на перенаправление:
+open httpbin.org 80
+GET /redirect/4 HTTP/1.1 (Получить ресурс /redirect/4 по протоколу HTTP версии 1.1)
+Host: httpbin.org
+Accept: */*
+
+
+Ответ на запрос:
+HTTP/1.1 302 FOUND (Код состояния 302 указывает, что данные были перемещены на сервере)
+Connection: keep-alive (Поддерживает соединение)
+Server: gunicorn/19.9.0 (Информация о сервере)
+Date: Fri, 28 Sep 2018 17:22:18 GMT
+Content-Type: text/html; charset=utf-8
+Content-Length: 247
+Location: /relative-redirect/3 (Ресурс был временно перемещен по адресу /relative-redirect/3)
+Access-Control-Allow-Origin: *
+Access-Control-Allow-Credentials: true
+Via: 1.1 vegur
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">               (Получили html разметку)
+<title>Redirecting...</title>
+<h1>Redirecting...</h1>
+<p>You should be redirected automatically to target URL: <a href="/relative-redirect/3">/relative-redirect/3</a>.  If not click the link.
+
+
