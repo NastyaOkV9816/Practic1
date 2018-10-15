@@ -1,0 +1,66 @@
+Задние:
+-Создать HTML форму c action="http://httpbin.org/post" method="POST" и enctype="multipart/form-data"
+-Добавить в форму поля firstname, lastname, group, message (textarea), myimg (file).
+-Проверить результат отправки данных формы.<html>
+Была создана следующая HTML форма:
+ <html>
+   <head>
+    <meta charset="utf-8">
+    <title>Задание 4</title>
+   </head>
+   <body>
+   <form method="POST" action="http://httpbin.org/post" enctype=”multipart/form-data”>
+    <p>First Name:<br>
+     <input type="text" name="firstname" size="30">
+    </p>
+    <p>Last Name:<br>
+     <input type="text"  name="lastname" size="30">
+    </p>
+    <p>Group:<br>
+     <input type="text"  name="group" size="30">
+    </p>
+    <p>Message:<br>
+     <input type="textarea"  name="message" size="30">
+    </p>
+    <p>My image:<br>
+     <input type="file" name="myimg" size="30">
+    </p>
+
+    <p><input type="submit" value="Отправить"></p>
+   </form>
+   </body>
+</html>
+
+
+Данная страница была открыта в браузере
+
+
+Ответ в формате JSON:
+{
+  "args": {}, 
+  "data": "", 
+  "files": {}, 
+  "form": {                (Параметры,которые входят в отправленную форму)
+    "firstname": "Anastasiya", 
+    "group": "NMT-362701", 
+    "lastname": "Okatyeva", 
+    "message": "Privet!", 
+    "myimg": ""
+  }, 
+  "headers": {            (Заголовки запроса, принятые сервером)
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8", 
+    "Accept-Encoding": "gzip, deflate", 
+    "Accept-Language": "ru-RU,ru;q=0.9,en-US;q=0.8,en;q=0.7", 
+    "Cache-Control": "max-age=0", 
+    "Connection": "close", 
+    "Content-Length": "80", 
+    "Content-Type": "application/x-www-form-urlencoded", 
+    "Host": "httpbin.org",   
+    "Origin": "null", 
+    "Upgrade-Insecure-Requests": "1", 
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36"
+  }, 
+  "json": null,                  
+  "origin": "212.193.94.40",   (Мой Ip адрес)
+  "url": "http://httpbin.org/post"   (Адрес HTML страницы)
+}
